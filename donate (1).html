@@ -1,0 +1,242 @@
+<html lang="en">
+<head>
+<title>Donate — Pills Of Hope</title>
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e8f9f0, #f4fff9);
+    color: #002366;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(11,138,84,0.12), rgba(199,243,223,0.06));
+  box-shadow: 0 8px 30px rgba(6,40,33,0.06);
+  border-bottom: 4px solid rgba(11,138,84,0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+.header-inner {
+  width: 95%;
+  margin: 0 auto;
+  padding: 18px 0;
+}
+.brand, .navlinks {
+  display: inline-block;
+  font-size: 16px;
+}
+.brand .circle {
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid #0b8a54;
+  display:inline-block;
+  text-align:center;
+  font-weight:800;
+  font-size:18px;
+  color:#0b8a54;
+  line-height:46px;
+  margin-right:12px;
+}
+.brand .name {
+  display:inline-block;
+  font-size:24px;
+  font-weight:800;
+  color:#002366;
+}
+
+/* navlinks */
+.navlinks {
+  float: right;
+  margin-top: 6px;
+}
+.navlinks a{
+  color:#002366;
+  font-weight:700;
+  font-size:15px;
+  padding:8px 12px;
+  border-radius:10px;
+  display:inline-block;
+}
+.navlinks a:hover{ color:#0b8a54; }
+
+/* ---------------- FORM CONTAINER ---------------- */
+.form-container {
+    width: 950px;
+    margin: 150px auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 38px;
+    border-radius: 22px;
+    border: 5px solid rgba(11,138,84,0.08);
+}
+
+.form-container h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #002366;
+    text-align: center;
+}
+
+/* fields */
+input, select, textarea {
+    width: 100%;
+    padding: 15px;
+    margin-top: 14px;
+    border-radius: 14px;
+    border: 2px solid rgba(11,138,84,0.15);
+    font-size: 15px;
+    background: #fafffd;
+}
+
+/* submit button */
+button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #0b8a54, #2bbf86);
+    color: #fff;
+}
+
+.back-btn {
+    background: #555;
+    margin-top: 14px;
+}
+.footer { text-align:center; margin:50px 0; padding-bottom:50px; }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="circle">POH</span>
+      <span class="name">Pills Of Hope💊</span>
+    </div>
+
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="donate.html">Donate</a>
+      <a href="search.html">Search</a>
+      <a href="statistics.html">Statistics</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- FORM -->
+<div class="form-container">
+<h2>Donate Medicine</h2>
+
+<form name="donationForm">
+
+<p><strong>Donor Name:</strong>
+<input name="name" type="text" placeholder="please enter youre name" required></p>
+
+<p><strong>Medicine Name:</strong>
+<input name="medicine" type="text" placeholder="medicine" required></p>
+
+<p><strong>Quantity:</strong>
+<input name="quantity" type="number" ></p>
+
+<p><strong>Type:</strong>
+<select name="type">
+    <option>Pill</option>
+    <option>Syrup</option>
+    <option>Capsule</option>
+    <option>Injection</option>
+    <option>Ointment</option>
+    <option>Other</option>
+</select></p>
+
+<p><strong>Category:</strong>
+<select name="category">
+    <option value="">Select Category</option>
+    <option value="pain">Pain Relief</option>
+    <option value="cold">Cold & Flu</option>
+    <option value="vitamin">Vitamins & Wellness</option>
+    <option value="child">Children Essentials</option>
+    <option value="firstaid">First Aid & Safety</option>
+    <option value="chronic">Chronic Care Support</option>
+</select></p>
+
+<p><strong>Expiry Date:</strong>
+<input name="expiry" type="date" ></p>
+
+<p><strong>Location:</strong>
+<input name="gps" type="text" placeholder="gps" required></p>
+
+<p><strong>Phone Number:</strong>
+<input name="phone" type="text" placeholder="** *** ***" required></p>
+
+<textarea name="notes" rows="4" placeholder="Notes"></textarea>
+
+<button type="submit">Submit Donation</button>
+</form>
+
+<button class="back-btn" onclick="window.location.href='index.html'">Back</button>
+
+</div>
+
+<div class="footer">
+    <div> contact-us: pillsofhope@gmail.com .</div>
+    <div>Thank you for visiting Pills Of Hope❤️</div>
+</div>
+
+
+<!-- ✅ FIXED SCRIPT – ONLY THIS PART CHANGED -->
+<script type="text/javascript">
+
+document.donationForm.onsubmit = function () {
+
+    var stored = localStorage.getItem("donations");
+    var donations = [];
+
+    if (stored !== null && stored !== "") {
+        donations = JSON.parse(stored);
+    }
+
+    var d = {
+        name: document.donationForm.name.value,
+        category: document.donationForm.category.value,
+        medicine: document.donationForm.medicine.value,
+        quantity: document.donationForm.quantity.value,
+        type: document.donationForm.type.value,
+        expiry: document.donationForm.expiry.value,
+        gps: document.donationForm.gps.value,
+        phone: document.donationForm.phone.value,
+        notes: document.donationForm.notes.value
+    };
+
+    donations.push(d);
+
+    localStorage.setItem("donations", JSON.stringify(donations));
+
+    alert("Thank you! Your donation has been saved.");
+
+    document.donationForm.reset();
+
+    return false;
+};
+
+
+</script>
+
+</body>
+</html>

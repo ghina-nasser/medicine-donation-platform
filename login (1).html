@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Pills Of Hope — Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e8f9f0, #f4fff9);
+    color: #002366;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(11,138,84,0.12), rgba(199,243,223,0.06));
+  box-shadow: 0 8px 30px rgba(6,40,33,0.06);
+  border-bottom: 4px solid rgba(11,138,84,0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+.header-inner {
+  width: 95%;
+  margin: 0 auto;
+  padding: 18px 0;
+}
+.brand, .navlinks {
+  display: inline-block;
+  font-size: 16px;
+}
+.brand .circle {
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid #0b8a54;
+  display:inline-block;
+  text-align:center;
+  font-weight:800;
+  font-size:18px;
+  color:#0b8a54;
+  line-height:46px;
+  margin-right:12px;
+}
+.brand .name {
+  display:inline-block;
+  font-size:24px;
+  font-weight:800;
+  color:#002366;
+}
+
+/* navlinks */
+.navlinks {
+  float: right;
+  margin-top: 6px;
+}
+.navlinks a{
+  color:#002366;
+  font-weight:700;
+  font-size:15px;
+  padding:8px 12px;
+  border-radius:10px;
+  display:inline-block;
+}
+.navlinks a:hover{ color:#0b8a54; }
+
+/* Login Box */
+.login-box{
+    width:500px;
+    height:300px;
+    margin:160px auto 20px;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    border-left:6px solid #0b8a54;
+    box-shadow:0 10px 30px rgba(0,0,0,0.10);
+}
+
+input{
+    width:95%;
+    padding:14px;
+    margin-top:14px;
+    border-radius:12px;
+    border:2px solid #0b8a54;
+    font-size:15px;
+}
+input:focus{
+    border-color:#2bbf86;
+    outline:none;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    background:#0b8a54;
+    color:white;
+    font-weight:700;
+}
+
+
+/* --- TOOL SECTIONS BELOW LOGIN --- */
+.section-title {
+    font-size:26px;
+    font-weight:800;
+    text-align:center;
+    margin-top:30px;
+    color:#0b8a54;
+}
+
+.tool-box {
+    width:90%;
+    max-width:800px;
+    margin:20px auto;
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    border-left:6px solid #0b8a54;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+.donation-card {
+    background:#f4fff9;
+    border:2px solid #0b8a54;
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:12px;
+}
+
+.action-btn {
+    display:inline-block;
+    padding:10px 12px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-weight:700;
+    margin-right:6px;
+    margin-top:8px;
+}
+.safe { background:#0b8a54; }
+.not-safe { background:#cc0000; }
+.delete { background:#b30000; }
+.approve { background:#0066cc; }
+.footer { text-align:center; margin:50px 0; padding-bottom:50px; }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="header-inner">
+        <div class="brand">
+            <span class="circle">POH</span>
+            <span class="name">Pills Of Hope💊</span>
+        </div>
+
+        <div class="navlinks">
+            <a href="index.html">Home</a>
+            <a href="donate.html">Donate</a>
+            <a href="search.html">Search</a>
+            <a href="statistics.html">Statistics</a>
+            <a href="login.html">Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- LOGIN -->
+<div class="login-box">
+    <h2>Login</h2>
+
+    <input id="username" type="text" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="loginUser()">Login</button>
+
+</div>
+
+<!-- DOCTOR TOOLS -->
+<div id="doctorPanel" style="display:none;">
+    <div class="section-title">Doctor Panel — Mark Medicines Safe</div>
+
+    <div id="doctorList" class="tool-box"></div>
+</div>
+
+<!-- ADMIN TOOLS -->
+<div id="adminPanel" style="display:none;">
+    <div class="section-title">Admin Panel — Manage Donations</div>
+
+    <div id="adminList" class="tool-box"></div>
+</div>
+
+<div class="footer">
+    <div> contact-us: pillsofhope@gmail.com .</div>
+    <div>Thank you for visiting Pills Of Hope❤️</div>
+  </div>
+<script>
+/* -------------------------------
+   LOGIN LOGIC
+-------------------------------- */
+function loginUser(){
+    var user = document.getElementById("username").value;
+    var pass = document.getElementById("password").value;
+
+    if(user === "doctor" && pass === "222"){
+        localStorage.setItem("role","doctor");
+        loadDoctor();
+        return;
+    }
+
+    if(user === "admin" && pass === "999"){
+        localStorage.setItem("role","admin");
+        loadAdmin();
+        return;
+    }
+
+    alert("Incorrect login.");
+}
+
+/* Load donations */
+function getDonations(){
+    return JSON.parse(localStorage.getItem("donations") || "[]");
+}
+
+/* -------------------------------
+   DOCTOR PANEL
+-------------------------------- */
+function loadDoctor(){
+    document.getElementById("doctorPanel").style.display="block";
+
+    var list = document.getElementById("doctorList");
+    var donations = getDonations();
+    var html = "";
+
+    for(var i=0;i<donations.length;i++){
+        html += '<div class="donation-card">';
+        html += "<b>"+donations[i].medicine+"</b><br>";
+        html += "Quantity: "+donations[i].quantity+"<br>";
+        html += "Category: "+donations[i].category+"<br>";
+        html += "Safety: "+(donations[i].safe || "Not Checked")+"<br>";
+
+        html += '<button class="action-btn safe" onclick="markSafe('+i+')">Mark Safe</button>';
+        html += '<button class="action-btn not-safe" onclick="markNotSafe('+i+')">Mark Not Safe</button>';
+
+        html += "</div>";
+    }
+
+    list.innerHTML = html;
+}
+
+/* Doctor Actions */
+function markSafe(i){
+    var d = getDonations();
+    d[i].safe = "SAFE";
+    localStorage.setItem("donations",JSON.stringify(d));
+    loadDoctor();
+}
+
+function markNotSafe(i){
+    var d = getDonations();
+    d[i].safe = "NOT SAFE";
+    localStorage.setItem("donations",JSON.stringify(d));
+    loadDoctor();
+}
+
+/* -------------------------------
+   ADMIN PANEL
+-------------------------------- */
+function loadAdmin(){
+    document.getElementById("adminPanel").style.display="block";
+
+    var list = document.getElementById("adminList");
+    var donations = getDonations();
+    var html = "";
+
+    for(var i=0;i<donations.length;i++){
+        html += '<div class="donation-card">';
+        html += "<b>"+donations[i].medicine+"</b><br>";
+        html += "Donor: "+donations[i].name+"<br>";
+        html += "Category: "+donations[i].category+"<br>";
+
+        html += '<button class="action-btn delete" onclick="deleteDonation('+i+')">Delete</button>';
+        html += '<button class="action-btn approve" onclick="approveRequest('+i+')">Approve</button>';
+
+        html += "</div>";
+    }
+
+    list.innerHTML = html;
+}
+
+/* Admin Actions */
+function deleteDonation(i){
+    var d = getDonations();
+    d.splice(i,1);
+    localStorage.setItem("donations",JSON.stringify(d));
+    loadAdmin();
+}
+
+function approveRequest(i){
+    alert("Request approved for: "+getDonations()[i].medicine);
+}
+</script>
+
+</body>
+</html>

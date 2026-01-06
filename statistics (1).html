@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Statistics — Pills Of Hope</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e8f9f0, #f4fff9);
+    color: #002366;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(11,138,84,0.12), rgba(199,243,223,0.06));
+  box-shadow: 0 8px 30px rgba(6,40,33,0.06);
+  border-bottom: 4px solid rgba(11,138,84,0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+.header-inner {
+  width: 95%;
+  margin: 0 auto;
+  padding: 18px 0;
+}
+.brand, .navlinks {
+  display: inline-block;
+  font-size: 16px;
+}
+.brand .circle {
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid #0b8a54;
+  display:inline-block;
+  text-align:center;
+  font-weight:800;
+  font-size:18px;
+  color:#0b8a54;
+  line-height:46px;
+  margin-right:12px;
+}
+.brand .name {
+  display:inline-block;
+  font-size:24px;
+  font-weight:800;
+  color:#002366;
+}
+
+/* navlinks */
+.navlinks {
+  float: right;
+  margin-top: 6px;
+}
+.navlinks a{
+  color:#002366;
+  font-weight:700;
+  font-size:15px;
+  padding:8px 12px;
+  border-radius:10px;
+  display:inline-block;
+}
+.navlinks a:hover{ color:#0b8a54; }
+
+
+/* main container spacing (leave space for fixed header) */
+.content {
+    width:1200px;
+    margin: 150px auto 60px;
+    padding: 0 16px;
+}
+
+/* Title */
+.section-title{
+    font-size:34px;
+    font-weight:800;
+    text-align:center;
+    margin-bottom:24px;
+}
+
+/* COUNTER */
+.counter-wrap {
+    text-align:center;
+    margin-bottom:30px;
+}
+.counter-card {
+    display:inline-block;
+    vertical-align: top;
+    width: 200px;
+    margin: 10px;
+    background:white;
+    border-radius:20px;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 8px 30px rgba(0,0,0,0.06);
+    border-left:7px solid #0b8a54;
+}
+.counter-number {
+    font-size:42px;
+    font-weight:800;
+    color:#002366;
+}
+.counter-label { font-size:18px; margin-top:8px; font-weight:600; }
+
+/* CHART AREA */
+.css-chart {
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.05);
+    margin-bottom:30px;
+    text-align:center;
+    height: 300px;
+}
+.chart-row {
+    /* center the columns */
+    text-align:center;
+    margin-top:18px;
+}
+/* each column */
+.chart-col {
+    display:inline-block;
+    vertical-align: bottom;
+    width: 60px;
+    margin: 0 18px;
+    text-align:center;
+}
+/* bar itself */
+.bar {
+    background:#0b8a54;
+    width:100%;
+    border-radius:10px 10px 0 0;
+    height: 10px; /* default – JS will set actual height */
+    display:inline-block;
+    color:white;
+    font-weight:700;
+    font-size:14px;
+    line-height:1.1;
+}
+/* month label */
+.month{
+    display:block;
+    margin-top:10px;
+    font-weight:600;
+    color:#002366;
+}
+
+/* PROGRESS CIRCLE */
+.progress-area {
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:30px;
+}
+.progress-circle {
+    display:inline-block;
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    background:#d5f7e8; /* pale background */
+    border: 10px solid #ffffff;
+    box-shadow:0 8px 30px rgba(0,0,0,0.05);
+    text-align:center;
+    font-size:26px;
+    font-weight:700;
+    color:#002366;
+    line-height:160px;
+}
+
+/* MED LIST */
+.med-list{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.05);
+    margin-top:16px;
+}
+.med-list h3{ color:#002366; margin-bottom:12px; }
+.med-list ul{ list-style:none; padding:0; margin:0; }
+.med-list li{
+    padding:10px;
+    background:#f4fff9;
+    margin:8px 0;
+    border-radius:12px;
+    font-weight:600;
+    color:#0b8a54;
+    border-left:6px solid #0b8a54;
+}
+.footer { text-align:center; margin:50px 0; padding-bottom:50px; }
+
+/* small helper to clear floats if we used them somewhere */
+.clearfix { clear: both; height: 0; line-height: 0; font-size: 0; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="header-inner">
+        <div class="brand">
+            <div class="circle">POH</div>
+            <span class="name">Pills Of Hope💊</span>
+        </div>
+        <div class="navlinks">
+            <a href="index.html">Home</a>
+            <a href="donate.html">Donate</a>
+            <a href="search.html">Search</a>
+            <a href="statistics.html">Statistics</a>
+            <a href="login.html">Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Main content -->
+<div class="content">
+
+    <div class="section-title">📊 Donation Statistics Dashboard</div>
+
+    <!-- COUNTERS -->
+    <div class="counter-wrap" id="counterWrap">
+        <div class="counter-card">
+            <div class="counter-number" id="medicinesCount">0</div>
+            <div class="counter-label">Medicines Donated</div>
+        </div>
+        <div class="counter-card">
+            <div class="counter-number" id="familiesCount">0</div>
+            <div class="counter-label">Families Helped</div>
+        </div>
+        <div class="counter-card">
+            <div class="counter-number" id="donorsCount">0</div>
+            <div class="counter-label">Donors</div>
+        </div>
+        <div class="counter-card">
+            <div class="counter-number" id="requestsCount">0</div>
+            <div class="counter-label">Requests Fulfilled</div>
+        </div>
+    </div>
+
+    <!-- BAR CHART -->
+    <div class="css-chart">
+        <div class="chart-title">📈 Monthly Donations Trend</div>
+        <div class="chart-row" id="chartRow">
+            <!-- Columns:  -->
+            <div class="chart-col">
+                <div class="bar" id="bar0">0</div>
+                <span class="month">Jan</span>
+            </div>
+            <div class="chart-col">
+                <div class="bar" id="bar1">0</div>
+                <span class="month">Feb</span>
+            </div>
+            <div class="chart-col">
+                <div class="bar" id="bar2">0</div>
+                <span class="month">Mar</span>
+            </div>
+            <div class="chart-col">
+                <div class="bar" id="bar3">0</div>
+                <span class="month">Apr</span>
+            </div>
+            <div class="chart-col">
+                <div class="bar" id="bar4">0</div>
+                <span class="month">May</span>
+            </div>
+            <div class="chart-col">
+                <div class="bar" id="bar5">0</div>
+                <span class="month">Jun</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <h2 class="section-title">🎯 Monthly Goal Progress</h2>
+    <div class="progress-area">
+        <!-- simplified circle (numeric percentage shown inside) -->
+        <div class="progress-circle" id="progressCircle">0%</div>
+    </div>
+
+    <!-- MOST NEEDED -->
+    <div class="med-list" id="mostNeeded">
+        <h3>🔥 Most Needed Medicines</h3>
+        <ul id="mostNeededList">
+            <li>Insulin Pens</li>
+            <li>Blood Pressure Tablets</li>
+            <li>Baby Formula</li>
+            <li>Antibiotic Syrups</li>
+            <li>Asthma Inhalers</li>
+        </ul>
+    </div>
+
+</div>
+<div class="footer">
+    <div> contact-us: pillsofhope@gmail.com .</div>
+    <div>Thank you for visiting Pills Of Hope❤️</div>
+  </div>
+
+<script>
+/* utility: parse donations from localStorage (returns array) */
+function loadDonationsFromStorage() {
+    var raw = localStorage.getItem('donations');
+    if (!raw || raw === "null") {
+        return [];
+    }
+    var parsed = null;
+    try {
+        parsed = JSON.parse(raw);
+    } catch(e) {
+        // fallback: if not JSON, return empty
+        parsed = [];
+    }
+    if (!parsed || parsed.length === undefined) return [];
+    return parsed;
+}
+
+/* compute stats from donations */
+function computeStats(donations) {
+    var stats = {
+        medicines: 0,
+        donors: 0,
+        families: 0,
+        requests: 0,
+        monthly: [0,0,0,0,0,0] // Jan..Jun sample buckets
+    };
+
+    var donorsMap = {};
+    var familiesMap = {};
+
+    for (var i = 0; i < donations.length; i++) {
+        var d = donations[i];
+        if (!d) continue;
+
+        stats.medicines += 1; // each donation object counts as a medicine donated
+
+        // donor uniqueness by name (if name exists)
+        var name = d.name;
+        if (name && name !== "") {
+            if (!donorsMap[name]) {
+                donorsMap[name] = 1;
+            }
+        }
+
+        // family uniqueness by location (gps) or phone as fallback
+        var familyKey = (d.gps && d.gps !== "") ? d.gps : (d.phone || "");
+        if (familyKey && familyKey !== "") {
+            if (!familiesMap[familyKey]) {
+                familiesMap[familyKey] = 1;
+            }
+        }
+
+        // requests fulfilled: if donation has a 'fulfilled' flag set to true (optional)
+        if (d.fulfilled === true || d.fulfilled === "true") {
+            stats.requests += 1;
+        }
+
+        // monthly bucket: use expiry date or a createdAt field if present
+        // We'll prefer a "createdAt" field if present (ISO date), otherwise try expiry month as proxy.
+        var monthIndex = -1;
+        if (d.createdAt) {
+            var dt = new Date(d.createdAt);
+            if (!isNaN(dt.getTime())) {
+                monthIndex = dt.getMonth(); // 0..11
+            }
+        } else if (d.expiry) {
+            var dt2 = new Date(d.expiry);
+            if (!isNaN(dt2.getTime())) {
+                monthIndex = dt2.getMonth();
+            }
+        }
+
+        // map months 0..5 (Jan..Jun). If outside range, ignore.
+        if (monthIndex >= 0 && monthIndex <= 5) {
+            stats.monthly[monthIndex] = stats.monthly[monthIndex] + 1;
+        }
+    }
+
+    // finalize counts
+    var donorsCount = 0;
+    for (var k in donorsMap) { if (donorsMap.hasOwnProperty(k)) donorsCount++; }
+    var familiesCount = 0;
+    for (var k2 in familiesMap) { if (familiesMap.hasOwnProperty(k2)) familiesCount++; }
+
+    stats.donors = donorsCount;
+    stats.families = familiesCount;
+
+    // If requests count is zero (no explicit fulfilled flag), estimate requests as medicines * 1 (equal)
+    if (stats.requests === 0) stats.requests = stats.medicines;
+
+    return stats;
+}
+
+/* render stats into DOM (no animation) */
+function renderStats(stats) {
+    var elMedicines = document.getElementById('medicinesCount');
+    var elFamilies = document.getElementById('familiesCount');
+    var elDonors = document.getElementById('donorsCount');
+    var elRequests = document.getElementById('requestsCount');
+
+    elMedicines.innerHTML = stats.medicines;
+    elFamilies.innerHTML = stats.families;
+    elDonors.innerHTML = stats.donors;
+    elRequests.innerHTML = stats.requests;
+
+    // bar heights: find each bar by id
+    var maxBar = 1;
+    for (var i=0;i<stats.monthly.length;i++){
+        if (stats.monthly[i] > maxBar) maxBar = stats.monthly[i];
+    }
+    // ensure at least 1 to avoid division by zero
+    if (maxBar < 1) maxBar = 1;
+
+    for (var j=0;j<6;j++){
+        var barId = 'bar' + j;
+        var barEl = document.getElementById(barId);
+        if (barEl) {
+            var v = stats.monthly[j];
+            // compute height in pixels relative to max: max height = 180px
+            var heightPx = Math.round((v / maxBar) * 180);
+            if (heightPx < 6 && v > 0) heightPx = 6; // minimum visible
+            barEl.style.height = heightPx + 'px';
+            barEl.innerHTML = v;
+        }
+    }
+
+    // progress: percent of goal. We define a simple goal: medicines per month target = 100 (example)
+    // But instead compute monthly progress as (sum of Jan..Jun) / (goal). Take goal as 200 for demo.
+    var totalInPeriod = 0;
+    for (var m=0;m<stats.monthly.length;m++) totalInPeriod += stats.monthly[m];
+    var goal = 200; // you may change this or compute dynamically
+    var percent = 0;
+    if (goal > 0) percent = Math.round((totalInPeriod / goal) * 100);
+    if (percent > 100) percent = 100;
+    var progressEl = document.getElementById('progressCircle');
+    progressEl.innerHTML = percent + '%';
+}
+
+/* initialize: load donations, compute, render */
+function initStatsPage() {
+    var donations = loadDonationsFromStorage(); // array
+    var stats = computeStats(donations);
+    renderStats(stats);
+}
+
+/* run on load */
+initStatsPage();
+
+</script>
+</body>
+</html>

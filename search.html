@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pills Of Hope — Search Medicine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e8f9f0, #f4fff9);
+    color: #002366;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(11,138,84,0.12), rgba(199,243,223,0.06));
+  box-shadow: 0 8px 30px rgba(6,40,33,0.06);
+  border-bottom: 4px solid rgba(11,138,84,0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+.header-inner {
+  width: 95%;
+  margin: 0 auto;
+  padding: 18px 0;
+}
+.brand, .navlinks {
+  display: inline-block;
+  font-size: 16px;
+}
+.brand .circle {
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid #0b8a54;
+  display:inline-block;
+  text-align:center;
+  font-weight:800;
+  font-size:18px;
+  color:#0b8a54;
+  line-height:46px;
+  margin-right:12px;
+}
+.brand .name {
+  display:inline-block;
+  font-size:24px;
+  font-weight:800;
+  color:#002366;
+}
+
+/* navlinks */
+.navlinks {
+  float: right;
+  margin-top: 6px;
+}
+.navlinks a{
+  color:#002366;
+  font-weight:700;
+  font-size:15px;
+  padding:8px 12px;
+  border-radius:10px;
+  display:inline-block;
+}
+.navlinks a:hover{ color:#0b8a54; }
+
+/* HERO */
+.hero {
+    margin-top:100px;
+    text-align:center;
+    padding:20px;
+}
+.hero h1 { font-size:46px; font-weight:800; }
+.hero p { font-size:22px; font-weight:600; }
+
+/* SEARCH BOX  */
+.search-box {
+    max-width:1000px;
+    margin: 25px auto;
+    padding: 22px;
+    border-radius: 20px;
+    border: 3px solid #0b8a54;
+    background: #ffffff;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Input field */
+.search-box input {
+    width: 95%;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    border: 2px solid #0b8a54;
+    border-radius: 14px;
+    background: #f7fffb;
+    color: #002366;
+}
+
+/* Search button */
+.search-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: 800;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    color: white;
+    background: #0b8a54; /* deep green */
+    box-shadow: 0 5px 18px rgba(11,138,84,0.3); /* allowed: box-shadow */
+}
+.search-btn:hover {
+    background: #139961; /* lighter green */
+}
+
+/* RESULTS */
+.results {
+    width:1000px;
+    margin:30px auto;
+}
+.result-card {
+    background:#ffffff;
+    border-radius:14px;
+    border:3px solid rgba(11,138,84,0.08);
+    padding:16px;
+    margin-bottom:16px;
+}
+.result-info p { 
+    margin:4px 0; 
+    font-size:16px;
+    font-weight:600;
+}
+
+.request-btn {
+    background:#0b8a54;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.footer {
+    text-align:center;
+    margin:80px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="circle">POH</div>
+      <span class="name">Pills Of Hope💊</span>
+    </div>
+
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="donate.html">Donate</a>
+      <a href="search.html">Search</a>
+      <a href="statistics.html">Statistics</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <h1>🔍 Find the Medicine You Need</h1>
+  <p>Search our community-powered medicine list.</p>
+</div>
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Search medicine name...">
+  <button id="searchBtn" class="search-btn">Search</button>
+</div>
+
+<div id="results" class="results"></div>
+
+<div class="footer">
+    <div>contact-us: pillsofhope@gmail.com</div>
+    <div>Thank you for visiting Pills Of Hope❤️</div>
+</div>
+
+<script>
+
+function getDonations() {
+    var txt = localStorage.getItem("donations");
+    if (!txt) return [];
+    return JSON.parse(txt);
+}
+
+var searchBtn = document.getElementById("searchBtn");
+var searchInput = document.getElementById("searchInput");
+var resultsDiv = document.getElementById("results");
+
+/* Render function */
+function render(list) {
+    resultsDiv.innerHTML = "";
+
+    if (list.length === 0) {
+        resultsDiv.innerHTML = "<p>No medicine found.</p>";
+        return;
+    }
+
+    for (var i = 0; i < list.length; i++) {
+        var d = list[i];
+
+        var card = "<div class='result-card'>" +
+            "<div class='result-info'>" +
+            "<p><strong>Medicine:</strong> " + d.medicine + "</p>" +
+            "<p><strong>Quantity:</strong> " + d.quantity + "</p>" +
+            "<p><strong>Donor:</strong> " + d.name + "</p>" +
+            "<p><strong>Category:</strong> " + d.category + "</p>" +
+            "</div>" +
+            "<button class='request-btn' onclick=\"alert('You requested " + d.medicine + "')\">Request</button>" +
+            "</div>";
+
+        resultsDiv.innerHTML += card;
+    }
+}
+
+/* Search handler */
+function doSearch() {
+    var q = searchInput.value.toLowerCase();
+    if (q === "") return;
+
+    var arr = getDonations();
+    var filtered = [];
+
+    for (var i = 0; i < arr.length; i++) {
+        var med = arr[i].medicine ? arr[i].medicine.toLowerCase() : "";
+        if (med.indexOf(q) !== -1) {
+            filtered.push(arr[i]);
+        }
+    }
+
+    render(filtered);
+}
+
+searchBtn.onclick = doSearch;
+searchInput.onkeypress = function(e) {
+    if (e.keyCode === 13) doSearch();
+};
+</script>
+
+</body>
+</html>

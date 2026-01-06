@@ -1,0 +1,295 @@
+<html>
+<head>
+<title>Pills Of Hope — From Hand to Hand, From Heart to Heart</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" type="text/css">
+
+<style>
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e8f9f0, #f4fff9);
+    color: #002366;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(11,138,84,0.12), rgba(199,243,223,0.06));
+  box-shadow: 0 8px 30px rgba(6,40,33,0.06);
+  border-bottom: 4px solid rgba(11,138,84,0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+.header-inner {
+  width: 95%;
+  margin: 0 auto;
+  padding: 18px 0;
+}
+.brand, .navlinks {
+  display: inline-block;
+  font-size: 16px;
+}
+.brand .circle {
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid #0b8a54;
+  display:inline-block;
+  text-align:center;
+  font-weight:800;
+  font-size:18px;
+  color:#0b8a54;
+  line-height:46px;
+  margin-right:12px;
+}
+.brand .name {
+  display:inline-block;
+  font-size:24px;
+  font-weight:800;
+  color:#002366;
+}
+
+/* navlinks */
+.navlinks {
+  float: right;
+  margin-top: 6px;
+}
+.navlinks a{
+  color:#002366;
+  font-weight:700;
+  font-size:15px;
+  padding:8px 12px;
+  border-radius:10px;
+  display:inline-block;
+}
+.navlinks a:hover{ color:#0b8a54; }
+
+.page-spacer { height: 88px; }
+
+/* hero */
+.hero {
+  max-width: 1200px;
+  margin: 40px auto 20px;
+  padding: 20px;
+  text-align: center;
+}
+.hero h1 { font-size:46px; font-weight:800; margin-bottom:12px; }
+.hero p.subtitle { font-size:24px; font-weight:600; margin-bottom:8px; }
+
+/* cards */
+.grid-wrap {
+  text-align: center;
+  max-width: 1200px;
+  margin: 40px auto 70px;
+}
+.card {
+  display: inline-block;
+  width: 400px;
+  margin: 12px 2%;
+  background: linear-gradient(180deg, rgba(11,138,84,0.05), rgba(74,144,226,0.02));
+  border-radius: 18px;
+  padding: 50px 28px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #002366;
+  border: 3px solid rgba(11,138,84,0.06);
+  cursor: pointer;
+  position: relative;
+  top: 0px;
+  box-shadow: 0 4px 12px rgba(6,40,33,0.04);
+}
+.card:hover {
+  top: -8px;
+  box-shadow: 0 20px 48px rgba(6,40,33,0.09);
+}
+
+/* category view */
+#category-view { display:none; width:800px; margin:40px auto; }
+.category-header { margin-bottom:20px; font-size:3rem; }
+
+.back-btn {
+  background:#0b8a54;
+  color:white;
+  padding:12px 18px;
+  border-radius:8px;
+  font-size:1.2rem;
+  float:right;
+}
+.back-btn:hover { background:#2bbf86; }
+
+.category-item {
+  background: linear-gradient(180deg, rgba(11,138,84,0.05), rgba(74,144,226,0.02));
+  border-radius: 14px;
+  width: 90%;
+  margin-bottom: 18px;
+  padding: 22px 20px;
+  border: 2px solid rgba(11,138,84,0.06);
+}
+.category-item-info {
+  float:left;
+  width:75%;
+  font-size:20px;
+  line-height:1.9;
+  color:#002366;
+}
+.category-item-controls { float:right; width:23%; text-align:right; }
+
+.request-btn {
+  background:#0b8a54;
+  color:white;
+  padding:10px 14px;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+}
+
+.footer { text-align:center; margin:50px 0; padding-bottom:50px; }
+
+</style>
+
+</head>
+<body>
+
+<div id="main" style="display:block;">
+
+  <div class="header">
+    <div class="header-inner">
+      <div class="brand" style="padding-left:10px;">
+        <span class="circle">POH</span>
+        <span class="name">Pills Of Hope💊</span>
+      </div>
+
+      <div class="navlinks" style="padding-right:10px;">
+        <a href="index.html">Home</a>
+        <a href="donate.html">Donate</a>
+        <a href="search.html">Search</a>
+        <a href="statistics.html">Statistics</a>
+        <a href="login.html">Login</a>
+      </div>
+
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+
+  <div class="page-spacer"></div>
+
+  <div class="hero">
+    <h1>❤️From Hand to Hand, From Heart to Heart❤️</h1>
+    <p class="subtitle">From Forgotten shelves, unused medicine travels to people who truly need it.</p>
+  </div>
+
+  <div id="grid-view" class="grid-wrap">
+    <div class="card" onclick="openCategory('pain')">😌 Pain Relief</div>
+    <div class="card" onclick="openCategory('cold')">❄️🤧 Cold & Flu Care</div>
+    <div class="card" onclick="openCategory('firstaid')">❤️‍🩹🩺 First Aid & Safety</div>
+    <div class="card" onclick="openCategory('chronic')">💚💪 Chronic Care Support</div>
+    <div class="card" onclick="openCategory('child')">🧸 Children’s Essentials</div>
+    <div class="card" onclick="openCategory('vitamin')">🍃 Vitamins & Wellness</div>
+  </div>
+
+  <div id="category-view">
+    <div class="category-header">
+      <h2 id="category-title" style="display:inline-block; margin:0;"></h2>
+      <a class="back-btn" onclick="goBack()">← Back</a>
+      <div style="clear:both;"></div>
+    </div>
+    <div id="category-list"></div>
+  </div>
+
+  <div class="footer">
+    <div> contact-us: pillsofhope@gmail.com .</div>
+    <div>Thank you for visiting Pills Of Hope❤️</div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+/* JSON helpers */
+function toJson(obj){ return JSON.stringify(obj); }
+function fromJson(s){ if(!s) return []; return JSON.parse(s); }
+
+/* Load donations */
+var donations = fromJson(localStorage.getItem("donations"));
+
+/* Add default samples if none exist */
+if (donations.length === 0) {
+  donations = [
+    {category:"pain", medicine:"Ibuprofen 200mg", quantity:"20 tabs", expiry:"2026-06-01", gps:"Beirut", phone:"", type:"OTC", notes:"Sealed box"},
+    {category:"cold", medicine:"Paracetamol 500mg", quantity:"16 tabs", expiry:"2025-12-01", gps:"Tripoli", phone:"", type:"OTC", notes:""}
+  ];
+  localStorage.setItem("donations", toJson(donations));
+}
+
+/* escape */
+function esc(s){
+  if(!s) return "";
+  s = s.replace(/&/g,"&amp;");
+  s = s.replace(/</g,"&lt;");
+  s = s.replace(/>/g,"&gt;");
+  return s;
+}
+
+/* Show category */
+function openCategory(cat) {
+
+  document.getElementById("grid-view").style.display = "none";
+  document.getElementById("category-view").style.display = "block";
+
+  var title = document.getElementById("category-title");
+  var list  = document.getElementById("category-list");
+
+  title.innerHTML = cat.toUpperCase();
+  list.innerHTML = "";
+
+  var found = false;
+
+  for (var i=0; i<donations.length; i++) {
+
+    var d = donations[i];
+
+    if (d.category === cat) {
+      found = true;
+
+      var h = "";
+      h += '<div class="category-item">';
+      h += '<div class="category-item-info">';
+      h += '<p><strong>Medicine:</strong> ' + esc(d.medicine) + '</p>';
+      h += '<p><strong>Quantity:</strong> ' + esc(d.quantity) + '</p>';
+      h += '<p><strong>Type:</strong> ' + esc(d.type) + '</p>';
+      h += '<p><strong>Expiry:</strong> ' + esc(d.expiry) + '</p>';
+      h += '<p><strong>Location:</strong> ' + esc(d.gps) + '</p>';
+      h += '<p><strong>Phone:</strong> ' + esc(d.phone) + '</p>';
+      h += '<p><strong>Notes:</strong> ' + esc(d.notes) + '</p>';
+      h += '</div>';
+      h += '<div class="category-item-controls">';
+      h += '<button class="request-btn" onclick="requestItem(\'' + esc(d.medicine) + '\')">Request</button>';
+      h += '</div>';
+      h += '<div style="clear:both;"></div></div>';
+
+      list.innerHTML += h;
+    }
+  }
+
+  if (!found) {
+    list.innerHTML = "<p>No donations available in this category.</p>";
+  }
+}
+
+function goBack(){
+  document.getElementById("grid-view").style.display = "block";
+  document.getElementById("category-view").style.display = "none";
+}
+
+function requestItem(name){
+  alert("You requested " + name);
+}
+
+</script>
+
+</body>
+</html>
